@@ -37,4 +37,12 @@ export class TarefaComponent implements OnInit {
     this.listaTarefas = this.listaTarefas.filter(item => (item.id != id))
   }
 
+  completar(id: number){
+    const tarefaEncontrada = this.listaTarefas.find(item => item.id == id)
+
+    if (tarefaEncontrada){
+      tarefaEncontrada.concluida = !tarefaEncontrada.concluida
+    }
+  }
+
 }
