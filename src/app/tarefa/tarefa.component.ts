@@ -7,16 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TarefaComponent implements OnInit {
 
+  TAREFA_KEY = 'tarefa_key'
   listaTarefas : any[]  = []
-
   constructor() { }
 
   ngOnInit(): void {
-    this.listaTarefas = [
-      {id: 0, nome:'Lavar o carro', concluida: false},
-      {id: 1, nome:'Ir ao mercado', concluida: true},
-      {id: 2, nome:'Lavar roupas', concluida: false}
-    ]
+    const tarefas = localStorage.getItem(this.TAREFA_KEY)
+    if (tarefas){
+      this.listaTarefas = JSON.parse(tarefas)
+    }
   }
 
   adicionar(nomeTarefa: string){
@@ -28,6 +27,7 @@ export class TarefaComponent implements OnInit {
 
     if (!tarefaEncontrada) {
       this.listaTarefas.push({id: this.listaTarefas.length, nome: nomeTarefa, concluida: false})
+      this.salvarLista()
     } else {
       alert("Tarefa existente!")
     }
@@ -35,6 +35,7 @@ export class TarefaComponent implements OnInit {
 
   deletar(id: number){
     this.listaTarefas = this.listaTarefas.filter(item => (item.id != id))
+    this.salvarLista()
   }
 
   completar(id: number){
@@ -42,7 +43,12 @@ export class TarefaComponent implements OnInit {
 
     if (tarefaEncontrada){
       tarefaEncontrada.concluida = !tarefaEncontrada.concluida
+      this.salvarLista()
     }
+  }
+
+  private salvarLista(){
+    localStorage.setItem(this.TAREFA_KEY, JSON.stringify(this.listaTarefas))
   }
 
 }
