@@ -20,7 +20,18 @@ export class TarefaComponent implements OnInit {
   }
 
   adicionar(nomeTarefa: string){
-    this.listaTarefas.push({id: this.listaTarefas.length, nome: nomeTarefa, concluida: false})
+    if (nomeTarefa.trim().length == 0){
+      return
+    }
+
+    const tarefaEncontrada = this.listaTarefas.find(item => item.nome.toLowerCase() == nomeTarefa.toLowerCase())
+
+    if (!tarefaEncontrada) {
+      this.listaTarefas.push({id: this.listaTarefas.length, nome: nomeTarefa, concluida: false})
+    } else {
+      alert("Tarefa existente!")
+    }
+
   }
 
 }
