@@ -2,8 +2,8 @@
 
   <h3>Lista de Tarefas</h3>
 
-  <input type="text" placeholder="Criar Tarefa!" #inputTarefa>
-  <button (click)="adicionar(inputTarefa.value)">
+  <input type="text" placeholder="Criar Tarefa!" #inputTarefa (keyup.enter)="adicionar(inputTarefa.value); inputTarefa.value=''">
+  <button (click)="adicionar(inputTarefa.value); inputTarefa.value = ''">
     <i class="fa fa-plus"></i>
   </button>
 
