@@ -31,7 +31,10 @@ export class TarefaComponent implements OnInit {
     } else {
       alert("Tarefa existente!")
     }
+  }
 
+  deletar(id: number){
+    this.listaTarefas = this.listaTarefas.filter(item => (item.id != id))
   }
 
 }
